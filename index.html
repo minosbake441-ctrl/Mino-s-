@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mino's Bake - Premium customized cakes, pastries, and desserts in Pakistan. Because Purity Matters.">
+    <title>Mino's Bake | Because Purity Matters</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://i.ibb.co/931zw2WS/Untitled-design-1.png">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --color-cream: #FAF6F0; 
+            --color-cream-light: #FFFBF7; 
+            --color-pink: #E8A0BF; 
+            --color-pink-dark: #d68cae; 
+            --color-green: #25D366; 
+            --color-text-dark: #2C1E16; 
+            --color-text-light: #6b5c54; 
+            
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-cream);
+            color: var(--color-text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Glassmorphism Background Elements */
+        .glass-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float-blob 20s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: rgba(232, 160, 191, 0.6); }
+        .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: rgba(255, 251, 247, 0.8); }
+
+        @keyframes float-blob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5%, 10%) scale(1.1); }
+        }
+
+        h1, h2, h3 { font-family: var(--font-heading); color: var(--color-text-dark); }
+        h1 { font-size: clamp(3rem, 8vw, 5rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+        h2 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 600; text-align: center; margin-bottom: 3rem; }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px; 
+            padding-bottom: 40px;
+        }
+
+        .hero-logo-wrapper {
+            position: relative;
+            margin-bottom: 2rem;
+            animation: slide-zoom-in 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes slide-zoom-in {
+            0% { 
+                opacity: 0; 
+                transform: translateX(100vw) scale(0.2); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateX(0) scale(1); 
+            }
+        }
+
+
+
+        .hero-logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 20px 40px rgba(232, 160, 191, 0.3);
+            border: 4px solid var(--color-cream-light);
+            transition: var(--transition-bounce);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo:hover {
+            transform: scale(1.1) rotate(-8deg);
+            box-shadow: 0 30px 50px rgba(232, 160, 191, 0.4);
+        }
+
+        .tagline {
+            font-family: var(--font-body);
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--color-pink-dark);
+            font-weight: 500;
+            margin-top: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: fade-up 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero h1 {
+            margin-top: 1rem;
+            animation: fade-up 1s ease-out 0.1s forwards;
+            opacity: 0;
+        }
+
+        section {
+            padding: 80px 0;
+            position: relative;
+            scroll-margin-top: 100px;
+        }
+
+        /* Menu Grid Refactored for Background Images & Cart Add */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .menu-item {
+            position: relative;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Text at bottom */
+            min-height: 220px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            will-change: transform;
+            opacity: 0;
+            transform: translateY(30px);
+            overflow: hidden;
+        }
+
+        .menu-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+            z-index: 0;
+        }
+
+        .menu-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(28, 19, 14, 0.95) 0%, rgba(28, 19, 14, 0.2) 100%);
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-item.in-view {
+            animation: fade-up 0.8s ease forwards;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(232, 160, 191, 0.3);
+        }
+
+        .menu-item:hover .menu-bg {
+            transform: scale(1.1);
+        }
+
+        /* Cart Add Hint */
+        .add-to-cart-hint {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .menu-item:hover .add-to-cart-hint {
+            opacity: 1;
+            transform: translateY(0);
+            background: var(--color-pink);
+            border-color: transparent;
+        }
+
+        .add-to-cart-hint i { width: 14px; height: 14px; stroke-width: 3px; }
+
+        .menu-title {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: white;
+            transition: color 0.3s;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+
+        .menu-item:hover .menu-title {
+            color: var(--color-pink);
+        }
+
+        .menu-price {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--color-pink);
+            display: flex;
+            align-items: center;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            margin-top: 0.3rem;
+        }
+        
+        .menu-price span {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-left: 0.4rem;
+            color: #ececec;
+        }
+
+        .menu-subtitle {
+            font-size: 0.95rem; 
+            color: #cfc2ba; 
+            font-weight: 400; 
+            font-family: var(--font-body);
+            margin-bottom: 0.2rem;
+            display: block;
+        }
+
+        /* Gallery Section - Antigravity */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        box-shadow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        filter 0.6s ease;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .gallery-item.in-view {
+            animation: fade-up 1s ease forwards;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-20px) scale(1.03) rotate(-1deg);
+            box-shadow: 0 30px 60px -15px rgba(232, 160, 191, 0.5);
+            z-index: 10;
+        }
+
+        .gallery-item:nth-child(even):hover {
+            transform: translateY(-20px) scale(1.03) rotate(1.5deg);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(44,30,22,0.8), transparent);
+            padding: 2rem 1.5rem 1.5rem;
+            color: white;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition-smooth);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-overlay span {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Links Section */
+        .links-section {
+            background-color: var(--color-cream-light);
+            border-top: 1px solid rgba(232, 160, 191, 0.2);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            background: white;
+            color: var(--color-text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            font-family: var(--font-heading);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition-bounce);
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .social-btn.in-view {
+            animation: fade-up 0.8s ease forwards;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-pink);
+            box-shadow: 0 15px 30px rgba(232, 160, 191, 0.2);
+        }
+
+        .social-btn i {
+            stroke: var(--color-pink);
+        }
+
+        /* Mobile Sticky Action */
+        .sticky-whatsapp-mobile {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-green);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 18px 20px;
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 -4px 25px rgba(37, 211, 102, 0.4);
+            transition: background-color 0.3s;
+        }
+
+        .sticky-whatsapp-mobile i { stroke: white; }
+        .sticky-whatsapp-mobile:active { background-color: #1ea952; }
+
+        /* Floating Cart Icon */
+        .floating-cart {
+            position: fixed;
+            top: 24px; right: 24px;
+            background: white;
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            z-index: 2100;
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            border: 2px solid var(--color-cream-light);
+            color: var(--color-text-dark);
+        }
+
+        .floating-cart:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 15px 30px rgba(232, 160, 191, 0.25);
+            border-color: var(--color-pink);
+            color: var(--color-pink-dark);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -2px; right: -2px;
+            background: var(--color-pink);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 800;
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(232, 160, 191, 0.4);
+            font-family: var(--font-heading);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cart-badge.pop {
+            transform: scale(1.4);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 40px; 
+            left: 50%;
+            transform: translateX(-50%) translateY(40px);
+            background: rgba(44, 30, 22, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 1rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            z-index: 1100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .toast i { color: var(--color-pink); }
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Modals (Cart & Product Details) */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px);
+            z-index: 2000; opacity: 0; visibility: hidden;
+            transition: var(--transition-smooth);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        .modal-content {
+            background: var(--color-cream-light); border-radius: 20px;
+            width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto;
+            padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(30px); opacity: 0; transition: var(--transition-bounce);
+            position: relative;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); opacity: 1; }
+        
+        .modal-close {
+            position: absolute; top: 20px; right: 20px;
+            background: transparent; border: none; cursor: pointer;
+            color: var(--color-text-light); transition: color 0.3s;
+        }
+        .modal-close:hover { color: var(--color-pink-dark); }
+        
+        .modal-title { font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 20px; color: var(--color-text-dark); }
+        
+        /* Cart Specifics */
+        .cart-items-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .cart-item-info { flex: 1; }
+        .cart-item-title { font-weight: 600; font-family: var(--font-heading); color: var(--color-text-dark); }
+        .cart-item-price { font-size: 0.9rem; color: var(--color-pink-dark); font-weight: 500; }
+        .cart-item-actions { display: flex; align-items: center; gap: 15px; }
+        .qty-controls { display: flex; align-items: center; gap: 10px; background: white; border-radius: 20px; padding: 4px 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .qty-btn { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--color-text-dark); font-weight: 600; }
+        .qty-val { font-weight: 600; width: 20px; text-align: center; }
+        .remove-btn { color: #ff4d4d; background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 5px;}
+        .remove-btn:hover { color: #d63030; }
+        
+        .cart-total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; font-family: var(--font-heading); margin-bottom: 20px; }
+        .place-order-btn {
+            display: block; width: 100%; padding: 15px; background: var(--color-green); color: white;
+            border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700; font-family: var(--font-heading);
+            cursor: pointer; text-align: center; transition: background 0.3s; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        .place-order-btn:hover { background: #1ea952; }
+
+        /* Product Details Modal Image */
+        .product-modal-img {
+            width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 20px;
+        }
+
+        /* Scroll Arrow */
+        .scroll-down {
+            position: absolute; bottom: 30px; display: flex; flex-direction: column; align-items: center; gap: 5px;
+            color: var(--color-text-light); font-weight: 500; font-size: 0.9rem; animation: bounce 2s infinite;
+            cursor: pointer; text-decoration: none;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Header */
+        .main-header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 2000;
+            background: rgba(250, 246, 240, 0.9); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(232, 160, 191, 0.2);
+            transition: var(--transition-smooth);
+        }
+        .header-container { display: flex; justify-content: space-between; align-items: center; height: 75px; }
+        .header-logo { height: 45px; width: 45px; border-radius: 50%; object-fit: cover; }
+        .logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--color-text-dark); font-family: var(--font-heading); font-weight: 800; font-size: 1.4rem; }
+        .desktop-nav { display: none; gap: 30px; }
+        .desktop-nav a { text-decoration: none; color: var(--color-text-dark); font-weight: 600; font-family: var(--font-heading); font-size: 1.05rem; transition: color 0.3s; }
+        .desktop-nav a:hover { color: var(--color-pink-dark); }
+        .mobile-menu-btn { background: none; border: none; cursor: pointer; color: var(--color-text-dark); padding: 5px; }
+        .mobile-nav {
+            position: absolute; top: 75px; left: 0; width: 100%; background: var(--color-cream-light);
+            display: flex; flex-direction: column; padding: 0; max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.05); z-index: 1500;
+        }
+        .mobile-nav.open { max-height: 350px; padding: 10px 0; border-bottom: 2px solid var(--color-pink); }
+        .mobile-nav a { padding: 15px 24px; text-decoration: none; color: var(--color-text-dark); font-weight: 600; font-family: var(--font-heading); font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        @media (min-width: 768px) {
+            .mobile-menu-btn { display: none; }
+            .desktop-nav { display: flex; }
+        }
+
+        /* Our Story */
+        .story-content { max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.15rem; color: var(--color-text-light); }
+        .story-content p { margin-bottom: 1.5rem; }
+
+        /* Generic Masonry Gallery - Float animation adjusted */
+        .gallery-grid {
+            column-count: 1; column-gap: 1.5rem; padding: 1rem 0;
+        }
+        @media (min-width: 600px) { .gallery-grid { column-count: 2; } }
+        @media (min-width: 900px) { .gallery-grid { column-count: 3; } }
+
+        .gallery-item {
+            position: relative; border-radius: 24px; overflow: hidden; margin-bottom: 1.5rem; break-inside: avoid;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05); opacity: 0; transform: translateY(40px);
+        }
+        .gallery-item.in-view { animation: fade-up 1s ease forwards; transform: translateY(0); opacity: 1; }
+        .gallery-float-wrap { animation: floating-img 6s ease-in-out infinite; height: 100%; transition: transform 0.6s ease; }
+        .gallery-item:nth-child(even) .gallery-float-wrap { animation-duration: 7s; animation-delay: 1s; }
+        .gallery-item:nth-child(3n) .gallery-float-wrap { animation-duration: 8s; animation-delay: 2s; }
+        .gallery-item:hover .gallery-float-wrap { transform: scale(1.03); z-index: 10; }
+        .gallery-item img { width: 100%; display: block; object-fit: cover; }
+        .gallery-overlay { bottom: -12px; padding-bottom: calc(1.5rem + 12px); }
+        
+        @keyframes floating-img {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Testimonials */
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .testimonial-card {
+            background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+            border: 1px solid rgba(232, 160, 191, 0.2); text-align: center; transition: var(--transition-bounce);
+        }
+        .testimonial-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(232, 160, 191, 0.15); }
+        .quote { font-style: italic; color: var(--color-text-light); margin-bottom: 1.5rem; font-size: 1.05rem; }
+        .author { font-family: var(--font-heading); font-weight: 700; color: var(--color-text-dark); font-size: 1.1rem; }
+
+        /* Menu Filter Bar */
+        .menu-filter-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+            animation: fade-up 0.8s ease forwards;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--color-cream-light);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-text-light);
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--color-pink);
+            color: var(--color-pink-dark);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--color-pink);
+            color: white;
+            border-color: var(--color-pink);
+            box-shadow: 0 8px 20px rgba(232, 160, 191, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            body { padding-bottom: 70px; }
+            .menu-item .add-to-cart-hint {
+                opacity: 1;
+                transform: translateY(0);
+                background: var(--color-pink);
+                border-color: transparent;
+            }
+            .sticky-whatsapp-mobile {
+                display: flex;
+                animation: slide-up-bar 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+                animation-delay: 1s;
+                transform: translateY(100%);
+            }
+            .toast { bottom: 100px; /* Above whatsapp bar */ }
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.5rem; }
+            section { padding: 60px 0; }
+            .hero { min-height: 80vh; }
+            .floating-cart { top: 80px; right: 16px; width: 50px; height: 50px; }
+            .testimonial-card { padding: 1.5rem; }
+        }
+
+        @keyframes slide-up-bar {
+            to { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="#" class="logo-link">
+                <img src="https://i.ibb.co/931zw2WS/Untitled-design-1.png" alt="Mino's Bake Logo" class="header-logo">
+                <span class="header-title">Mino's Bake</span>
+            </a>
+            <nav class="desktop-nav">
+                <a href="#hero">Home</a>
+                <a href="#story">Our Story</a>
+                <a href="#menu">Menu</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#links">Contact</a>
+            </nav>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
+        </div>
+        <nav class="mobile-nav" id="mobile-nav">
+            <a href="#hero" onclick="toggleMobileMenu()">Home</a>
+            <a href="#story" onclick="toggleMobileMenu()">Our Story</a>
+            <a href="#menu" onclick="toggleMobileMenu()">Menu</a>
+            <a href="#gallery" onclick="toggleMobileMenu()">Gallery</a>
+            <a href="#links" onclick="toggleMobileMenu()">Contact</a>
+        </nav>
+    </header>
+
+    <div class="glass-blob blob-1"></div>
+    <div class="glass-blob blob-2"></div>
+
+    <!-- Floating Cart Icon with Checkout -->
+    <div class="floating-cart" onclick="openCartModal()">
+        <i data-lucide="shopping-bag"></i>
+        <span class="cart-badge" id="cart-count">0</span>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i data-lucide="check-circle"></i>
+        <span id="toast-msg">Added to Cart!</span>
+    </div>
+
+    <main>
+        <section id="hero" class="hero container">
+            <div class="hero-logo-wrapper">
+                <img src="https://i.ibb.co/931zw2WS/Untitled-design-1.png" alt="Mino's Bake Logo" class="hero-logo">
+            </div>
+            <h1>Mino's Bake</h1>
+            <p class="tagline">Because Purity Matters</p>
+            <a href="#menu" class="scroll-down">
+                Scroll Down
+                <i data-lucide="chevron-down"></i>
+            </a>
+        </section>
+
+        <!-- Our Story Section -->
+        <section id="story" class="container" style="padding-top: 40px;">
+            <h2>Our Story</h2>
+            <div class="story-content scroll-animate">
+                <p>Welcome to Mino's Bake, where passion meets purity. We believe that every celebration deserves a centerpiece that not only looks breathtaking but tastes absolutely divine.</p>
+                <p>We specialize in artistic, customized cakes crafted with the highest quality, pure ingredients. From our signature Bento cakes to grand tiered masterpieces, every creation is baked fresh with love and an unwavering commitment to excellence.</p>
+            </div>
+        </section>
+
+        <!-- Menu & Pricing Section -->
+        <section id="menu" class="container">
+            <h2>Our Menu</h2>
+            <div class="menu-grid">
+                
+                <!-- Filter Bar -->
+                <div class="menu-filter-bar scroll-animate">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="cakes">Cakes</button>
+                    <button class="filter-btn" data-filter="brownies">Brownies</button>
+                    <button class="filter-btn" data-filter="pastries">Pastries</button>
+                    <button class="filter-btn" data-filter="sundaes">Sundaes</button>
+                </div>
+
+                <div class="menu-item scroll-animate" data-category="cakes" style="animation-delay: 0.1s;">
+                    <div class="menu-bg" style="background-image: url('https://images.unsplash.com/photo-1557308536-ee471ef2c390?auto=format&fit=crop&w=400&q=80');" onclick="showProductDetails('Customized Bento Cake', 800, 'https://images.unsplash.com/photo-1557308536-ee471ef2c390?auto=format&fit=crop&w=400&q=80', event, true)"></div>
+                    <div class="menu-overlay" onclick="showProductDetails('Customized Bento Cake', 800, 'https://images.unsplash.com/photo-1557308536-ee471ef2c390?auto=format&fit=crop&w=400&q=80', event, true)"></div>
+                    <div class="add-to-cart-hint" onclick="showProductDetails('Customized Bento Cake', 800, 'https://images.unsplash.com/photo-1557308536-ee471ef2c390?auto=format&fit=crop&w=400&q=80', event, true)"><i data-lucide="plus"></i> Add</div>
+                    <div class="menu-content" onclick="showProductDetails('Customized Bento Cake', 800, 'https://images.unsplash.com/photo-1557308536-ee471ef2c390?auto=format&fit=crop&w=400&q=80', event, true)">
+                        <div class="menu-title">Customized Bento Cake</div>
+                        <div class="menu-price">800 <span>PKR</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item scroll-animate" data-category="cakes" style="animation-delay: 0.2s;">
+                    <div class="menu-bg" style="background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80');" onclick="showProductDetails('Customized Standard Cake (1lb)', 1000, 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80', event, true)"></div>
+                    <div class="menu-overlay" onclick="showProductDetails('Customized Standard Cake (1lb)', 1000, 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80', event, true)"></div>
+                    <div class="add-to-cart-hint" onclick="showProductDetails('Customized Standard Cake (1lb)', 1000, 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80', event, true)"><i data-lucide="plus"></i> Add</div>
+                    <div class="menu-content" onclick="showProductDetails('Customized Standard Cake (1lb)', 1000, 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80', event, true)">
+                        <div class="menu-title">Customized<br>Standard Cake</div>
+                        <span class="menu-subtitle">1lb</span>
+                        <div class="menu-price">1,000 <span>PKR</span></div>
+                    </div>
+                </div>
+
+                <!-- Custom Inquiry Button for Special Cakes -->
+                <div class="menu-item scroll-animate" data-category="cakes" style="animation-delay: 0.3s;">
+                    <div class="menu-bg" style="background-image: url('https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=400&q=80');" onclick="discussDesign(event)"></div>
+                    <div class="menu-overlay" onclick="discussDesign(event)"></div>
+                    <div class="add-to-cart-hint" onclick="discussDesign(event)"><i data-lucide="message-circle"></i> Discuss</div>
+                    <div class="menu-content" onclick="discussDesign(event)">
+                        <div class="menu-title">Customized<br>Special Cakes</div>
+                        <span class="menu-subtitle">Price varies based on design</span>
+                        <div class="menu-price">Discuss <span>on WhatsApp</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item scroll-animate" data-category="brownies" style="animation-delay: 0.4s;">
+                    <div class="menu-bg" style="background-image: url('https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=400&q=80');" onclick="showProductDetails('Brownies (Box of 6)', 600, 'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=400&q=80', event)"></div>
+                    <div class="menu-overlay" onclick="showProductDetails('Brownies (Box of 6)', 600, 'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=400&q=80', event)"></div>
+                    <div class="add-to-cart-hint" onclick="addToCart('Brownies (Box of 6)', 600, event)"><i data-lucide="plus"></i> Add</div>
+                    <div class="menu-content" onclick="showProductDetails('Brownies (Box of 6)', 600, 'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=400&q=80', event)">
+                        <div class="menu-title">Brownies</div>
+                        <span class="menu-subtitle">Box of 6</span>
+                        <div class="menu-price">600 <span>PKR</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item scroll-animate" data-category="cakes" style="animation-delay: 0.5s;">
+                    <div class="menu-bg" style="background-image: url('https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=400&q=80');" onclick="showProductDetails('Cupcakes (Box of 6)', 500, 'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=400&q=80', event)"></div>
+                    <div class="menu-overlay" onclick="showProductDetails('Cupcakes (Box of 6)', 500, 'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=400&q=80', event)"></div>
+                    <div class="add-to-cart-hint" onclick="addToCart('Cupcakes (Box of 6)', 500, event)"><i data-lucide="plus"></i> Add</div>
+                    <div class="menu-content" onclick="showProductDetails('Cupcakes (Box of 6)', 500, 'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=400&q=80', event)">
+                        <div class="menu-title">Cupcakes</div>
+                        <span class="menu-subtitle">Box of 6</span>
+                        <div class="menu-price">500 <span>PKR</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item scroll-animate" data-category="pastries" style="animation-delay: 0.6s;">
+                    <div class="menu-bg" style="background-image: url('images/cake_pastries_menu.png');" onclick="showProductDetails('Pastries (Box of 12)', 700, 'images/cake_pastries_menu.png', event)"></div>
+                    <div class="menu-overlay" onclick="showProductDetails('Pastries (Box of 12)', 700, 'images/cake_pastries_menu.png', event)"></div>
+                    <div class="add-to-cart-hint" onclick="addToCart('Pastries (Box of 12)', 700, event)"><i data-lucide="plus"></i> Add</div>
+                    <div class="menu-content" onclick="showProductDetails('Pastries (Box of 12)', 700, 'images/cake_pastries_menu.png', event)">
+                        <div class="menu-title">Pastries</div>
+                        <span class="menu-subtitle">Box of 12</span>
+                        <div class="menu-price">700 <span>PKR</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item scroll-animate" data-category="sundaes" style="animation-delay: 0.7s;">
+                    <div class="menu-bg" style="background-image: url('images/cake_cup_sundae.png');" onclick="showProductDetails('Classic Cake Cup Sundae', 200, 'images/cake_cup_sundae.png', event)"></div>
+                    <div class="menu-overlay" onclick="showProductDetails('Classic Cake Cup Sundae', 200, 'images/cake_cup_sundae.png', event)"></div>
+                    <div class="add-to-cart-hint" onclick="addToCart('Classic Cake Cup Sundae', 200, event)"><i data-lucide="plus"></i> Add</div>
+                    <div class="menu-content" onclick="showProductDetails('Classic Cake Cup Sundae', 200, 'images/cake_cup_sundae.png', event)">
+                        <div class="menu-title">Classic Cake Cup Sundae</div>
+                        <div class="menu-price">200 <span>PKR</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="container">
+            <h2>Our Masterpieces</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item scroll-animate">
+                    <div class="gallery-float-wrap">
+                        <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=800&q=80" alt="Tiered Custom Cake" loading="lazy">
+                        <div class="gallery-overlay"><span>Tiered Custom Cake</span></div>
+                    </div>
+                </div>
+                <div class="gallery-item scroll-animate">
+                    <div class="gallery-float-wrap">
+                        <img src="images/cake_pastries_gallery.png" alt="Cake Pastries" loading="lazy">
+                        <div class="gallery-overlay"><span>Artisanal Pastries</span></div>
+                    </div>
+                </div>
+                <div class="gallery-item scroll-animate">
+                    <div class="gallery-float-wrap">
+                        <img src="https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&w=800&q=80" alt="Mini Bento Cake" loading="lazy">
+                        <div class="gallery-overlay"><span>Custom Bento</span></div>
+                    </div>
+                </div>
+                <div class="gallery-item scroll-animate">
+                    <div class="gallery-float-wrap">
+                        <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=800&q=80" alt="Signature Cupcakes" loading="lazy">
+                        <div class="gallery-overlay"><span>Signature Cupcakes</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="container">
+            <h2>Happy Customers</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card scroll-animate" style="animation-delay: 0.1s;">
+                    <p class="quote">"The customized bento cake was absolutely gorgeous and tasted even better! Highly recommended for all events."</p>
+                    <div class="author">- Sarah Ahmed</div>
+                </div>
+                <div class="testimonial-card scroll-animate" style="animation-delay: 0.2s;">
+                    <p class="quote">"Mino's Bake made our anniversary so special. The tiered cake was a true masterpiece and so fresh!"</p>
+                    <div class="author">- Ali Khan</div>
+                </div>
+                <div class="testimonial-card scroll-animate" style="animation-delay: 0.3s;">
+                    <p class="quote">"Best brownies in town! You can really taste the pure ingredients. Because Purity Matters indeed!"</p>
+                    <div class="author">- Fatima R.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links Section -->
+        <section id="links" class="links-section">
+            <div class="container">
+                <h2>Connect With Us</h2>
+                <div class="social-links">
+                    <a href="https://wa.me/923061488005" target="_blank" rel="noopener noreferrer" class="social-btn scroll-animate" style="animation-delay: 0.1s;">
+                        <i data-lucide="message-circle"></i> WhatsApp
+                    </a>
+                    <a href="https://www.instagram.com/bakeminos/" target="_blank" rel="noopener noreferrer" class="social-btn scroll-animate" style="animation-delay: 0.2s;">
+                        <i data-lucide="instagram"></i> Instagram
+                    </a>
+                    <a href="https://share.google/5fYWFq7lila8mqLNC" target="_blank" rel="noopener noreferrer" class="social-btn scroll-animate" style="animation-delay: 0.3s;">
+                        <i data-lucide="map-pin"></i> Location
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sticky Mobile Action -->
+    <a href="https://wa.me/923061488005" class="sticky-whatsapp-mobile" target="_blank" rel="noopener noreferrer">
+        <i data-lucide="message-circle"></i> Order via WhatsApp
+    </a>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeCartModal()"><i data-lucide="x"></i></button>
+            <h2 class="modal-title">Your Cart</h2>
+            <div id="cart-items" class="cart-items-list">
+                <!-- Cart items injected here -->
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">0 PKR</span>
+            </div>
+
+            <!-- Checkout Pre-Flight -->
+            <div id="checkout-form" style="display: none; margin-bottom: 20px; text-align: left; background: white; padding: 15px; border-radius: 15px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);">
+                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 10px; color: var(--color-text-dark);">Delivery Details</h3>
+                <input type="text" id="checkout-name" placeholder="Your Name (Required)" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #eee; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; outline: none;">
+                <input type="text" id="checkout-time" placeholder="Delivery Date/Time (e.g., Tomorrow at 5 PM)" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #eee; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; outline: none;">
+                <textarea id="checkout-address" placeholder="Delivery Address/Area" rows="2" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #eee; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; outline: none; resize: none;"></textarea>
+            </div>
+
+            <button class="place-order-btn" onclick="placeOrder()">Place Order via WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div id="product-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <button class="modal-close" onclick="closeProductModal()"><i data-lucide="x"></i></button>
+            <img id="product-modal-img" src="" alt="Product Image" class="product-modal-img">
+            <h2 id="product-modal-title" class="modal-title" style="margin-bottom: 10px;">Product Name</h2>
+            
+            <!-- Weight Options Container -->
+            <div id="product-weight-selector" style="display: none; margin-bottom: 15px;">
+                <label style="font-weight: 600; font-size: 0.95rem; margin-right: 10px;">Select Weight:</label>
+                <select id="product-weight" style="padding: 8px 15px; border-radius: 10px; border: 1px solid var(--color-pink); font-family: var(--font-body); font-weight: 600; font-size: 1rem; color: var(--color-text-dark); background: white; outline: none; cursor: pointer;">
+                    <option value="1">1 lb</option>
+                    <option value="2">2 lbs</option>
+                    <option value="3">3 lbs</option>
+                    <option value="4">4 lbs</option>
+                    <option value="5">5 lbs</option>
+                    <option value="6">6 lbs</option>
+                    <option value="7">7 lbs</option>
+                    <option value="8">8 lbs</option>
+                    <option value="9">9 lbs</option>
+                    <option value="10">10 lbs</option>
+                    <option value="11">11 lbs</option>
+                    <option value="12">12 lbs</option>
+                    <option value="13">13 lbs</option>
+                    <option value="14">14 lbs</option>
+                    <option value="15">15 lbs</option>
+                    <option value="16">16 lbs</option>
+                    <option value="17">17 lbs</option>
+                    <option value="18">18 lbs</option>
+                    <option value="19">19 lbs</option>
+                    <option value="20">20 lbs</option>
+                </select>
+            </div>
+
+            <p id="product-modal-price" style="font-size: 1.2rem; color: var(--color-pink-dark); font-weight: bold; margin-bottom: 20px;">0 PKR</p>
+            <button id="product-modal-add-btn" class="place-order-btn" style="background: var(--color-pink);">Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Initialize Icons, Animations & Cart Logic -->
+    <script>
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mobile-nav');
+            if (nav.classList.contains('open')) {
+                nav.classList.remove('open');
+            } else {
+                nav.classList.add('open');
+            }
+        }
+
+        // Discuss Design WhatsApp Redirect
+        function discussDesign(event) {
+            if(event) event.stopPropagation();
+            const message = encodeURIComponent("Hi Mino, I want to discuss a design for a Special Custom Cake.");
+            window.open(`https://wa.me/923061488005?text=${message}`, '_blank');
+        }
+
+        // Intersection Observer for scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
+
+            // Menu Filter Logic
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.getAttribute('data-filter');
+
+                    menuItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'flex';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 50);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                if (item.style.opacity === '0') {
+                                    item.style.display = 'none';
+                                }
+                            }, 400); 
+                        }
+                    });
+                });
+            });
+        });
+
+        // Add to Cart Logic
+        let cartItems = JSON.parse(localStorage.getItem('minos_cart')) || [];
+        let toastTimeout;
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-count');
+            const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            badge.innerText = totalItems;
+            
+            // Pop animation on badge
+            badge.classList.remove('pop');
+            void badge.offsetWidth; // trigger reflow
+            badge.classList.add('pop');
+        }
+
+        // Initialize cart badge on load
+        updateCartBadge();
+
+        function saveCart() {
+            localStorage.setItem('minos_cart', JSON.stringify(cartItems));
+            updateCartBadge();
+            renderCartItems(); // If cart is open
+        }
+
+        function addToCart(itemName, price, event) {
+            if(event) {
+                event.stopPropagation(); // Prevent opening modal when clicking 'Add'
+            }
+            const existingItem = cartItems.find(item => item.name === itemName);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({ name: itemName, price: price, quantity: 1 });
+            }
+            saveCart();
+            showToast(`Added ${itemName} to Cart`);
+        }
+
+        function updateQuantity(index, change) {
+            if (cartItems[index].quantity + change > 0) {
+                cartItems[index].quantity += change;
+            } else {
+                cartItems.splice(index, 1);
+            }
+            saveCart();
+        }
+
+        function removeFromCart(index) {
+            cartItems.splice(index, 1);
+            saveCart();
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total-price');
+            container.innerHTML = '';
+
+            const checkoutForm = document.getElementById('checkout-form');
+            if (cartItems.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color: var(--color-text-light);">Your cart is empty.</p>';
+                totalEl.innerText = '0 PKR';
+                if (checkoutForm) checkoutForm.style.display = 'none';
+                return;
+            }
+
+            let total = 0;
+            cartItems.forEach((item, index) => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+
+                const el = document.createElement('div');
+                el.className = 'cart-item';
+                el.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">${subtotal} PKR (${item.price} x ${item.quantity})</div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                            <span class="qty-val">${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                        </div>
+                        <button class="remove-btn" onclick="removeFromCart(${index})">
+                            <i data-lucide="trash-2"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+            // Re-initialize lucide icons for newly added elements
+            lucide.createIcons();
+            totalEl.innerText = `${total} PKR`;
+            if (checkoutForm) checkoutForm.style.display = 'block';
+        }
+
+        // Modal Functionality
+        const cartModal = document.getElementById('cart-modal');
+        const productModal = document.getElementById('product-modal');
+
+        function openCartModal() {
+            renderCartItems();
+            cartModal.classList.add('active');
+        }
+
+        function closeCartModal() {
+            cartModal.classList.remove('active');
+        }
+
+        function showProductDetails(name, basePrice, imgUrl, event, isCake = false) {
+            if (event) {
+                event.stopPropagation();
+            }
+            // If it's NOT a cake, and we clicked Add button, it should not reach here since onclick does addToCart directly.
+            // Wait, for cakes now the "Add" button calls showProductDetails.
+
+            document.getElementById('product-modal-img').src = imgUrl;
+            document.getElementById('product-modal-title').innerText = name;
+            
+            const priceEl = document.getElementById('product-modal-price');
+            const weightSelector = document.getElementById('product-weight-selector');
+            const weightSelect = document.getElementById('product-weight');
+            
+            let currentPrice = basePrice;
+            let currentName = name;
+            
+            if (isCake) {
+                weightSelector.style.display = 'block';
+                weightSelect.value = "1"; // Reset to 1lb
+                // If the name already has "(1lb)", we should strip it out so we can append dynamic ones cleanly
+                currentName = name.replace(' (1lb)', '').trim();
+                document.getElementById('product-modal-title').innerText = currentName;
+                priceEl.innerText = `${basePrice} PKR`;
+                
+                weightSelect.onchange = (e) => {
+                    const lbs = parseInt(e.target.value);
+                    currentPrice = basePrice * lbs;
+                    priceEl.innerText = `${currentPrice} PKR`;
+                };
+            } else {
+                weightSelector.style.display = 'none';
+                priceEl.innerText = `${basePrice} PKR`;
+            }
+            
+            const addBtn = document.getElementById('product-modal-add-btn');
+            addBtn.onclick = () => {
+                let finalName = currentName;
+                if (isCake) {
+                    finalName = `${currentName} (${weightSelect.value}lb)`;
+                }
+                addToCart(finalName, currentPrice);
+                closeProductModal();
+            };
+
+            productModal.classList.add('active');
+        }
+
+        function closeProductModal() {
+            productModal.classList.remove('active');
+        }
+
+        // Place Order Logic via WhatsApp
+        function placeOrder() {
+            if (cartItems.length === 0) {
+                alert("Please add items to your cart before ordering!");
+                return;
+            }
+            
+            const nameInput = document.getElementById('checkout-name');
+            const timeInput = document.getElementById('checkout-time');
+            const addressInput = document.getElementById('checkout-address');
+
+            if (!nameInput.value || !timeInput.value || !addressInput.value) {
+                alert("Please fill in all delivery details before placing the order.");
+                return;
+            }
+            
+            let message = "Hi Mino's Bake! I would like to order:\n\n";
+            let total = 0;
+            
+            cartItems.forEach((item, idx) => {
+                const subtotal = item.price * item.quantity;
+                message += `${idx + 1}. *${item.quantity}x* ${item.name} (${subtotal} PKR)\n`;
+                total += subtotal;
+            });
+            
+            message += `\n*Total:* ${total} PKR\n\n`;
+            message += `*Customer Details:*\n`;
+            message += `Name: ${nameInput.value}\n`;
+            message += `Delivery Date/Time: ${timeInput.value}\n`;
+            message += `Address: ${addressInput.value}\n\n`;
+            message += `Please confirm my order.`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/923061488005?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = message;
+            
+            toast.classList.add('show');
+            
+            if(toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
